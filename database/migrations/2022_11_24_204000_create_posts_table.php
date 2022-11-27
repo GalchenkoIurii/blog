@@ -15,8 +15,11 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('title', 255);
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
+            $table->string('title');
             $table->text('content');
             $table->string('img')->nullable();
             $table->unsignedBigInteger('views');
