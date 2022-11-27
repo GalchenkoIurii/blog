@@ -9,7 +9,7 @@
         <form method="POST" action="{{ route('posts.store') }}">
             @csrf
             <textarea
-                name="text"
+                name="content"
                 placeholder="{{ __('Text of the post') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
             >{{ old('text') }}</textarea>
