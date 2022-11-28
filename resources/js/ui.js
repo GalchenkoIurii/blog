@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
-    document.querySelector('button.close-btn').addEventListener('click', () => {
-        document.querySelector('.modal').style.display = 'none';
-    });
+    const closeBtn = document.querySelector('button.close-btn'),
+        modal = document.querySelector('.modal');
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
+
 });
