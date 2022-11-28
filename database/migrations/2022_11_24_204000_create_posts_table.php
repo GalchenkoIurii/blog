@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('img')->nullable();
-            $table->unsignedBigInteger('views');
+            $table->unsignedBigInteger('views')->default(0);
             $table->timestamps();
         });
     }
