@@ -40,6 +40,7 @@
                                     </div>
                                 </article>
                             @endforeach
+                            {{ $posts->links() }}
                         @else
                             <h2 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
                                 <span class="relative z-10">There are no posts...</span>
