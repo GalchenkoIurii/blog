@@ -22,12 +22,19 @@
                                             <span class="relative z-10">{{ $post->title }}</span>
                                         </a>
                                     </h2>
-                                    <time class="relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500 pl-3.5"
-                                          datetime="{{ $post->created_at }}">
-                                <span class="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
-                                    <span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
-                                </span>{{ $post->created_at }}
-                                    </time>
+
+
+                                        <time class="relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500 pl-3.5"
+                                              datetime="{{ $post->created_at }}">
+                                            <span class="mr-2">{{ $post->user->name }}</span>
+                                        <span class="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
+                                            <span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
+                                        </span>{{ $post->created_at }}
+                                        </time>
+
+
+{{--                                    <span class="absolute text-gray-800">{{ $post->user->name }}</span>--}}
+
                                     <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
                                         {{ $post->content }}
                                     </p>
