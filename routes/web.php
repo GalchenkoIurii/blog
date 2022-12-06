@@ -24,8 +24,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::resource('/posts', PostController::class)
-    ->except(['index'])
+    ->except(['index', 'show'])
     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
