@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Posts') }}
+            {{ $post->title }}
         </h2>
     </x-slot>
 
@@ -10,20 +10,7 @@
             <div class="mx-auto max-w-2xl lg:max-w-5xl">
                 <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
                     <div class="flex flex-col gap-16">
-                        @if(count($posts))
-                            @foreach($posts as $post)
                                 <article class="group relative flex flex-col items-start">
-                                    <h2 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-                                        <div class="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition
-                                            group-hover:scale-100 group-hover:opacity-100
-                                            dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl"></div>
-                                        <a href="{{ route('posts.show', ['post' => $post->id]) }}">
-                                            <span class="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
-                                            <span class="relative z-10">{{ $post->title }}</span>
-                                        </a>
-                                    </h2>
-
-
                                         <time class="relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500 pl-3.5"
                                               datetime="{{ $post->created_at }}">
                                             <span class="mr-2">{{ $post->user->name }}</span>
@@ -32,27 +19,10 @@
                                             </span>{{ $post->created_at }}
                                         </time>
 
-
-{{--                                    <span class="absolute text-gray-800">{{ $post->user->name }}</span>--}}
-
                                     <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
                                         {{ $post->content }}
                                     </p>
-                                    <div aria-hidden="true"
-                                         class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500">
-                                        Read article
-                                        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="ml-1 h-4 w-4 stroke-current">
-                                            <path d="M6.75 5.75 9.25 8l-2.5 2.25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </div>
                                 </article>
-                            @endforeach
-                            {{ $posts->links() }}
-                        @else
-                            <h2 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-                                <span class="relative z-10">There are no posts...</span>
-                            </h2>
-                        @endif
                     </div>
                     <div class="space-y-10 lg:pl-16 xl:pl-24">
                         <form action="" class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
@@ -200,26 +170,4 @@
         </div>
     </div>
 
-    @if(session()->has('success'))
-        <div class="modal relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-
-        <div class="fixed inset-0 z-10 overflow-y-auto">
-            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <div class="sm:flex sm:items-start">
-                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">{{ session('success') }}</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                        <button type="button" class="close-btn mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif
 </x-app-layout>
