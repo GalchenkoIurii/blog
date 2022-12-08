@@ -25,8 +25,9 @@ Route::get('/dashboard', function () {
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::resource('/posts', PostController::class)
-    ->except(['index'])
+    ->except(['index', 'show'])
     ->middleware(['auth', 'verified']);
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
