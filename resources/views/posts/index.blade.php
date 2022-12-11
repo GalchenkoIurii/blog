@@ -10,49 +10,51 @@
             <div class="mx-auto max-w-2xl lg:max-w-5xl">
                 <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
                     <div class="flex flex-col gap-16">
-                        @if(count($posts))
-                            @foreach($posts as $post)
-                                <article class="group relative flex flex-col items-start">
-                                    <h2 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-                                        <div class="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition
-                                            group-hover:scale-100 group-hover:opacity-100
-                                            dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl"></div>
-                                        <a href="{{ route('posts.show', ['post' => $post->id]) }}">
-                                            <span class="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
-                                            <span class="relative z-10">{{ $post->title }}</span>
-                                        </a>
-                                    </h2>
-
-
-                                        <time class="relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500 pl-3.5"
-                                              datetime="{{ $post->created_at }}">
-                                            <span class="mr-2">{{ $post->user->name }}</span>
-                                            <span class="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
-                                                <span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
-                                            </span>{{ $post->created_at }}
-                                        </time>
-
-
-{{--                                    <span class="absolute text-gray-800">{{ $post->user->name }}</span>--}}
-
-                                    <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                                        {{ $post->content }}
-                                    </p>
-                                    <div aria-hidden="true"
-                                         class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500">
-                                        Read article
-                                        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="ml-1 h-4 w-4 stroke-current">
-                                            <path d="M6.75 5.75 9.25 8l-2.5 2.25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
+                            @if(count($posts))
+                                @foreach($posts as $post)
+                                    <div class="p-6 flex space-x-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 -scale-x-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                                         </svg>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-center">
+                                                <div>
+                                                    <span class="text-gray-800">{{ $post->user->name }}</span>
+                                                    <small class="ml-2 text-sm text-gray-600">{{ $post->created_at->format('j M Y, g:i a') }}</small>
+                                                    @unless ($post->created_at->eq($post->updated_at))
+                                                        <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
+                                                    @endunless
+                                                </div>
+                                                @if($post->user->is(auth()->user()))
+                                                    <x-dropdown>
+                                                        <x-slot name="trigger">
+                                                            <button>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400"
+                                                                     viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                                </svg>
+                                                            </button>
+                                                        </x-slot>
+                                                        <x-slot name="content">
+                                                            <x-dropdown-link :href="route('posts.edit', $post)">
+                                                                {{ __('Edit') }}
+                                                            </x-dropdown-link>
+                                                        </x-slot>
+                                                    </x-dropdown>
+                                                @endif
+                                            </div>
+                                            <p class="mt-4 text-lg text-gray-900">{{ $post->content }}</p>
+                                        </div>
                                     </div>
-                                </article>
-                            @endforeach
-                            {{ $posts->links() }}
-                        @else
-                            <h2 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-                                <span class="relative z-10">There are no posts...</span>
-                            </h2>
-                        @endif
+                                @endforeach
+                            @else
+                                <h2 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+                                    <span class="relative z-10">There are no posts...</span>
+                                </h2>
+                            @endif
+                        </div>
+                        {{ $posts->links() }}
                     </div>
                     <div class="space-y-10 lg:pl-16 xl:pl-24">
                         <form action="" class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
