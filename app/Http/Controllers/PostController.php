@@ -78,7 +78,13 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $this->authorize('update', $post);
+
+        $request_data = array_diff($request->validated(), [null]);
+
+        $post->update($request_data);
+
+        return redirect(route('posts.index'))->with('success', 'The post has been updated');
     }
 
     /**
