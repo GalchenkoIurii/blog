@@ -52,7 +52,7 @@
                                                     </x-dropdown>
                                                 @endif
                                             </div>
-                                            <p class="mt-4 text-lg text-gray-900">{{ $post->content }}</p>
+                                            <p class="mt-4 text-lg text-gray-900">{{ $post->title }}</p>
                                         </div>
                                     </div>
                                 @endforeach
