@@ -3,7 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-use \App\Models\Post as PostModel;
+use App\Models\Post as PostModel;
 
 class Post extends Component
 {
