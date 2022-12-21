@@ -13,7 +13,7 @@
                         <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
                             @if(count($posts))
                                 @foreach($posts as $post)
-                                    <x-post :post="$post"/>
+                                    <x-post :$post/>
                                 @endforeach
                             @else
                                 <h2 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
